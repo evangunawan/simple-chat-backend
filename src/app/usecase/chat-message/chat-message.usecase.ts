@@ -8,7 +8,7 @@ export class ChatMessageUsecase {
     this._chatMessagePublisher = chatMessagePublisher;
   }
 
-  public async execute(chatMessage: ChatMessage) {
+  public async sendMessage(chatMessage: ChatMessage) {
     await this._chatMessagePublisher.publish('ChatMessage', chatMessage.toJSONString());
   }
 }

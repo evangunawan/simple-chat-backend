@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { ChatMessageController } from './chat-message.controller';
 import { RabbitMQInstance } from '../../infrastructure/driver/rabbitmq.driver';
 import { ChatMessageSubscriber } from './chat-message.subscriber';
-import { RabbitMQMessagePublisherService } from '../../infrastructure/service/publisher/rabbitmq.publisher';
-import { RabbitMQMessageConsumerService } from '../../infrastructure/service/consumer/rabbitmq.consumer';
+import { RabbitMQMessagePublisherService } from '../../infrastructure/service/message-broker/rabbitmq.publisher';
+import { RabbitMQMessageConsumerService } from '../../infrastructure/service/message-broker/rabbitmq.consumer';
 
 @Module({
   controllers: [ChatMessageController],

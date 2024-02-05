@@ -1,5 +1,5 @@
-import { Controller, OnModuleInit } from '@nestjs/common';
-import { RabbitMQMessageConsumerService } from '../../infrastructure/service/consumer/rabbitmq.consumer';
+import { OnModuleInit } from '@nestjs/common';
+import { RabbitMQMessageConsumerService } from '../../infrastructure/service/message-broker/rabbitmq.consumer';
 import { ConsumeMessage } from 'amqplib';
 
 export class ChatMessageSubscriber implements OnModuleInit {
