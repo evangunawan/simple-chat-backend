@@ -26,13 +26,14 @@ On the other side, the application supports horizontal scalability, which suppor
 we also provided Redis as a socket.io adapter to support multiple nodes magically.
 
 ### Setup
-
+Check these following steps to help you get started.
 #### Requirements
 This project needs active RabbitMQ and Redis connection to run.
 You can run the infrastructures needed included in `docker-compose.yml`.
 
 #### Running
 To setup a Node.js project, you can clone the project, open terminal and install dependencies.
+This project is recommended to use Node.js v18.x to run.
 ```bash
 $ npm install
 ```
@@ -46,9 +47,7 @@ $ npm run start:dev
 
 # Run a production server
 $ npm run start:prod
-
 ```
-
 
 ### Improvement Room
 Beside of the scalability and efficient application, this application has a lot room of improvements,
