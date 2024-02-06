@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 import * as morgan from 'morgan';
 import * as dotenv from 'dotenv';
 
-import { RabbitMQInstance } from './infrastructure/driver/rabbitmq.driver';
+import { RabbitMQInstance } from './infrastructure/provider/rabbitmq.connection';
 
 dotenv.config();
 

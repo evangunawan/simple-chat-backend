@@ -2,6 +2,7 @@ export class ChatMessage {
   public content: string;
   public timestamp: number;
   public clientId: string;
+  public roomId: string;
 
   constructor() {}
 
@@ -10,6 +11,7 @@ export class ChatMessage {
       content: this.content,
       timestamp: this.timestamp,
       clientId: this.clientId,
+      roomId: this.roomId,
     };
     return JSON.stringify(data);
   }

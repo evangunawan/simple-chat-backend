@@ -1,19 +1,19 @@
 import { Module } from '@nestjs/common';
 import { ChatMessageController } from './chat-message.controller';
-import { RabbitMQInstance } from '../../infrastructure/driver/rabbitmq.driver';
 import { ChatMessageSubscriber } from './chat-message.subscriber';
 import { RabbitMQMessagePublisherService } from '../../infrastructure/service/message-broker/rabbitmq.publisher';
 import { RabbitMQMessageConsumerService } from '../../infrastructure/service/message-broker/rabbitmq.consumer';
+import { ChatMessageUsecase } from '../../app/usecase/chat-message/chat-message.usecase';
+import { RabbitMQInstance } from '../../infrastructure/provider/rabbitmq.connection';
 
 @Module({
   controllers: [ChatMessageController],
   providers: [
     {
-      provide: RabbitMQMessagePublisherService,
+      provide: ChatMessageUsecase,
       useFactory: async () => {
-        // ? create a new channel for publisher, to separate channel with consumers.
         const channel = await RabbitMQInstance.connection.createChannel();
-        return new RabbitMQMessagePublisherService(channel);
+        return new ChatMessageUsecase(new RabbitMQMessagePublisherService(channel));
       },
     },
     {

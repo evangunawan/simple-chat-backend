@@ -3,11 +3,10 @@ import { Request, Response } from 'express';
 import { ChatMessageDto } from './chat-message.dto';
 import { ChatMessageUsecase } from '../../app/usecase/chat-message/chat-message.usecase';
 import { ChatMessage } from '../../app/entity/chat-message';
-import { RabbitMQMessagePublisherService } from '../../infrastructure/service/message-broker/rabbitmq.publisher';
 
 @Controller('chat-messages')
 export class ChatMessageController {
-  constructor(private rabbitMqMessagePublisherService: RabbitMQMessagePublisherService) {}
+  constructor(private chatMessageUseCase: ChatMessageUsecase) {}
 
   @Post('/')
   public async sendMessage(
@@ -15,13 +14,11 @@ export class ChatMessageController {
     @Res() res: Response,
     @Body() body: ChatMessageDto,
   ) {
-    const usecase = new ChatMessageUsecase(this.rabbitMqMessagePublisherService);
-
     const message: ChatMessage = new ChatMessage();
     message.content = body.content;
     message.clientId = body.clientId;
 
-    await usecase.sendMessage(message);
+    await this.chatMessageUseCase.sendMessage(message);
 
     return res.status(200).send();
   }

@@ -1,11 +1,11 @@
 import { Channel, connect, Connection } from 'amqplib';
 
-class RabbitMQDriver {
-  private static _instance: RabbitMQDriver;
+class RabbitmqConnection {
+  private static _instance: RabbitmqConnection;
 
-  public static get Instance(): RabbitMQDriver {
+  public static get Instance(): RabbitmqConnection {
     if (!this._instance) {
-      RabbitMQDriver._instance = new RabbitMQDriver();
+      RabbitmqConnection._instance = new RabbitmqConnection();
     }
     return this._instance;
   }
@@ -32,4 +32,4 @@ class RabbitMQDriver {
   }
 }
 
-export const RabbitMQInstance = RabbitMQDriver.Instance;
+export const RabbitMQInstance = RabbitmqConnection.Instance;

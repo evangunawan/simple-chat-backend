@@ -1,6 +1,8 @@
 import { MessagePublisher } from '../../service/message-publisher';
 import { ChatMessage } from '../../entity/chat-message';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class ChatMessageUsecase {
   private _chatMessagePublisher: MessagePublisher;
 
