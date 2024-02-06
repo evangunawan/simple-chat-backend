@@ -3,6 +3,8 @@ import { RabbitMQMessageConsumerService } from '../../infrastructure/service/mes
 import { ConsumeMessage } from 'amqplib';
 import { ProcessChatMessageUsecase } from '../../app/usecase/chat-message/process-chat-message.usecase';
 import { RabbitMQInstance } from '../../infrastructure/provider/rabbitmq.connection';
+import { ChatMessage } from '../../app/entity/chat-message';
+import { ChatRoom } from '../../app/entity/chat-room';
 
 @Injectable()
 export class ChatMessageSubscriber implements OnModuleInit {
@@ -16,8 +18,17 @@ export class ChatMessageSubscriber implements OnModuleInit {
   }
 
   private async consumeMessage(msg: ConsumeMessage): Promise<boolean> {
-    console.log('consume', msg.content.toString('utf8'));
-    this.processMessageUseCase.notifyMessageToRoom();
+    const body = msg.content.toString('utf8');
+    const parsedBody = JSON.parse(body);
+    console.log('consume', body);
+
+    const chatMessage = new ChatMessage();
+    chatMessage.content = parsedBody['content'];
+
+    const room = new ChatRoom();
+    room.roomId = parsedBody.room.roomId;
+
+    await this.processMessageUseCase.notifyMessageToRoom(room, chatMessage);
     return true;
   }
 }

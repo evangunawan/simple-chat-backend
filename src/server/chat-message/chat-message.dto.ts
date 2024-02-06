@@ -6,4 +6,7 @@ export class ChatMessageDto {
 
   @IsString()
   clientId: string;
+
+  @IsString()
+  roomId: string;
 }

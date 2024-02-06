@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { SocketService } from '../../service/socket';
 import { ChatMessage } from '../../entity/chat-message';
+import { ChatRoom } from '../../entity/chat-room';
 
 @Injectable()
 export class ProcessChatMessageUsecase {
@@ -10,7 +11,8 @@ export class ProcessChatMessageUsecase {
     this._socketService = socketService;
   }
 
-  public async notifyMessageToRoom(message: ChatMessage) {
-    this._socketService.send('test', 'message', message.content);
+  public async notifyMessageToRoom(room: ChatRoom, message: ChatMessage) {
+    console.log('sending', message.content, 'to', room.roomId);
+    this._socketService.send(room.roomId, 'chat', message.content);
   }
 }

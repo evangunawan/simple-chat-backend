@@ -6,7 +6,7 @@ import {
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { SocketConnectionInstance } from '../provider/socket.connection';
+import { SocketConnectionInstance } from '../infrastructure/provider/socket.connection';
 import { Server, Socket } from 'socket.io';
 
 @WebSocketGateway()
@@ -19,9 +19,16 @@ export class AppSocketGateway implements OnGatewayInit {
     client.emit('ping', `pong ${data}`);
   }
 
+  // chat room message handler included here, should we create new gateway?
+
+  @SubscribeMessage('joinroom')
+  handleJoinRoom(@MessageBody() data: string, @ConnectedSocket() client: Socket) {
+    client.join(data);
+    client.emit('roomevent', `${client.rooms}`);
+  }
+
   afterInit(server: Server) {
     this._server = server;
-    console.log('init socket Server');
     SocketConnectionInstance.setServer(server);
   }
 }

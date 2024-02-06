@@ -9,6 +9,6 @@ export class SocketIoService implements SocketService {
   public send(room: string, event: string, data: string): void {
     const server = SocketConnectionInstance.server;
 
-    server.emit(event, data);
+    server.to(room).emit(event, data);
   }
 }
