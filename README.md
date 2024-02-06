@@ -1,9 +1,9 @@
-# Simple Chat Backend
+# Chat Backend
 
 ### About
-A simple chat backend application written using Node.js with NestJS framework.
-It connects and uses RabbitMQ as a message broker to ensure message delivery and availability.
-It also uses socket.io as a socket server to notify frontend or clients on receiving new messages.
+Welcome to chat backend application written using Node.js with NestJS framework.
+A scalable, highly available real-time chat application written using TypeScript in Node.js.
+It also uses RabbitMQ as a message broker to ensure message delivery and availability.
 
 ### Architecture
 It uses clean architecture as the base of the project.
@@ -24,6 +24,31 @@ which will be consumed and process the message, such as sending notification to 
 
 On the other side, the application supports horizontal scalability, which supported natively using RabbitMQ,
 we also provided Redis as a socket.io adapter to support multiple nodes magically.
+
+### Setup
+
+#### Requirements
+This project needs active RabbitMQ and Redis connection to run.
+You can run the infrastructures needed included in `docker-compose.yml`.
+
+#### Running
+To setup a Node.js project, you can clone the project, open terminal and install dependencies.
+```bash
+$ npm install
+```
+
+#### Run the application
+To run the application, open up terminal and navigate to the project directory.
+Run the command below to start development server.
+```bash
+# Run a development server
+$ npm run start:dev
+
+# Run a production server
+$ npm run start:prod
+
+```
+
 
 ### Improvement Room
 Beside of the scalability and efficient application, this application has a lot room of improvements,
