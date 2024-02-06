@@ -12,7 +12,6 @@ export class ProcessChatMessageUsecase {
   }
 
   public async notifyMessageToRoom(room: ChatRoom, message: ChatMessage) {
-    console.log('sending', message.content, 'to', room.roomId);
     this._socketService.send(room.roomId, 'chat', message.content);
   }
 }

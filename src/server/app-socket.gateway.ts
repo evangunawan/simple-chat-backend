@@ -27,6 +27,12 @@ export class AppSocketGateway implements OnGatewayInit {
     client.emit('roomevent', `${client.rooms}`);
   }
 
+  @SubscribeMessage('leaveroom')
+  handleLeaveRoom(@MessageBody() data: string, @ConnectedSocket() client: Socket) {
+    client.leave(data);
+    client.emit('roomevent', `${client.rooms}`);
+  }
+
   afterInit(server: Server) {
     this._server = server;
     SocketConnectionInstance.setServer(server);
