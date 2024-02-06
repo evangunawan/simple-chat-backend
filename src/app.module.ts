@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './server/app.controller';
 import { ChatMessageModule } from './server/chat-message/chat-message.module';
-import { AppSocketGateway } from './server/app-socket.gateway';
+import { AppSocketGateway } from './infrastructure/gateway/app-socket.gateway';
 
 @Module({
   imports: [ChatMessageModule],

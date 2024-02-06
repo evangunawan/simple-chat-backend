@@ -1,3 +1,3 @@
 export interface SocketService {
-  send(room: string, data: string): void;
+  send(room: string, event: string, data: string): void;
 }
