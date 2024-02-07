@@ -9,7 +9,12 @@ import {
 import { SocketConnectionInstance } from '../infrastructure/provider/socket.connection';
 import { Server, Socket } from 'socket.io';
 
-@WebSocketGateway()
+@WebSocketGateway({
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+  },
+})
 export class AppSocketGateway implements OnGatewayInit {
   @WebSocketServer()
   private _server: Server;
