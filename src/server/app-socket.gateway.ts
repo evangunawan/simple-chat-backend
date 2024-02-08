@@ -24,20 +24,6 @@ export class AppSocketGateway implements OnGatewayInit {
     client.emit('ping', `pong ${data}`);
   }
 
-  // chat room message handler included here, should we create new gateway?
-
-  @SubscribeMessage('joinroom')
-  handleJoinRoom(@MessageBody() data: string, @ConnectedSocket() client: Socket) {
-    client.join(data);
-    this._server.to(data).emit('roomevent', 'someone joined');
-  }
-
-  @SubscribeMessage('leaveroom')
-  handleLeaveRoom(@MessageBody() data: string, @ConnectedSocket() client: Socket) {
-    client.leave(data);
-    this._server.to(data).emit('roomevent', 'someone left');
-  }
-
   afterInit(server: Server) {
     this._server = server;
     SocketConnectionInstance.setServer(server);

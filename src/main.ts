@@ -7,11 +7,13 @@ import * as dotenv from 'dotenv';
 
 import { RabbitMQInstance } from './infrastructure/provider/rabbitmq.connection';
 import { RedisIoAdapter } from './infrastructure/adapter/redisio.adapter';
+import { RedisInstance } from './infrastructure/provider/redis.connection';
 
 dotenv.config();
 
 async function bootstrap() {
   await RabbitMQInstance.initConnection(process.env.RABBITMQ_CONNECTION);
+  await RedisInstance.initConnection(process.env.REDIS_CONNECTION);
 
   const app = await NestFactory.create(AppModule, { cors: true });
   app.enableCors({
