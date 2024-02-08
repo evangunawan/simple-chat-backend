@@ -13,8 +13,11 @@ dotenv.config();
 async function bootstrap() {
   await RabbitMQInstance.initConnection(process.env.RABBITMQ_CONNECTION);
 
-  const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  const app = await NestFactory.create(AppModule, { cors: true });
+  app.enableCors({
+    origin: '*',
+    methods: '*',
+  });
   app.use(morgan('common'));
   app.useGlobalPipes(new ValidationPipe());
 

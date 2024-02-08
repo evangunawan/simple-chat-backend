@@ -55,4 +55,4 @@ such as:
 - Add a message read receipt, or message delivery status, using websocket and databases to store the status.
 - Refactor app socket gateway, since NestJS has its approach for WebSocket, socket server is provided and accessed from a singleton class. 
 - Add a database (such as MongoDB), to support rooms, logs, and users.
-
+- Add room features such as room password and API authentication to create/post a message. 
