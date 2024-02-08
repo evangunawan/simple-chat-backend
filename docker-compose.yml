@@ -41,3 +41,14 @@ services:
       timeout: 10s
       retries: 5
 
+#  nginx:
+#    build: ./nginx
+#    ports:
+#      - '8080:8080'
+#    networks:
+#      - appnetwork
+#    depends_on:
+#      - app
+
+#networks:
+#  appnetwork:

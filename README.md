@@ -49,6 +49,33 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## API
+This application allows you to chat inside a room, with multiple participants/clients.
+You can use sockets to join and listen chat messages in a room, and REST API to send a chat message to a room.
+
+#### Sending a chat message to a Room
+`POST /chat-messages`
+```bash
+$ curl -X POST -H "Content-Type: application/json" -d '{"content": "Hello world", "clientId": "evangunawan", "roomId": "ROOMONE"}' http://localhost:8080/chat-messages 
+```
+Which will send a message into room `roomId`.
+It accepts JSON body, which concludes:
+- `content` string: Message content.
+- `clientId` string: The sender clientId, can be generated or a plain string.
+- `roomId` string: Target room to send the message to.
+
+#### Connecting and receiving message in a room
+To connect and join room, you can emit a socket event from the frontend/client for example:
+```js
+socketClient.emit('joinroom', `${roomName}`);
+```
+and you can listen to `chat` event to receive real-time messages.
+```js
+socketClient.on(`chat`, (message) => {
+  console.log(message);
+});
+```
+
 ## Improvement Room
 Beside of the scalability and efficient application, this application has a lot room of improvements,
 such as:

@@ -28,12 +28,7 @@ export class AppSocketGateway implements OnGatewayInit {
 
   @SubscribeMessage('joinroom')
   handleJoinRoom(@MessageBody() data: string, @ConnectedSocket() client: Socket) {
-    console.log(`client joined ${client.id}`);
     client.join(data);
-    client.on('disconnect', () => {
-      console.log(`client disconnected from room ${client.id}`);
-    });
-
     this._server.to(data).emit('roomevent', 'someone joined');
   }
 
@@ -45,10 +40,6 @@ export class AppSocketGateway implements OnGatewayInit {
 
   afterInit(server: Server) {
     this._server = server;
-    // server.on('connection', (client) => {
-    //   client.on('disconnect', () => {
-    //   });
-    // });
     SocketConnectionInstance.setServer(server);
   }
 }
