@@ -30,12 +30,13 @@ export class ChatRoomSocketGateway {
     try {
       parsed = JSON.parse(data);
     } catch (e) {}
+    if (parsed) {
+      const { roomId, clientId } = parsed;
 
-    const { roomId, clientId } = parsed;
-
-    if (roomId) {
-      client.join(roomId);
-      await this.joinRoomUseCase.joinRoom(roomId, clientId);
+      if (roomId) {
+        client.join(roomId);
+        await this.joinRoomUseCase.joinRoom(roomId, clientId);
+      }
     }
   }
 
@@ -45,11 +46,13 @@ export class ChatRoomSocketGateway {
     try {
       parsed = JSON.parse(data);
     } catch (e) {}
-    const { roomId, clientId } = parsed;
+    if (parsed) {
+      const { roomId, clientId } = parsed;
 
-    if (roomId) {
-      client.leave(roomId);
-      await this.leaveRoomUseCase.leaveRoom(roomId, clientId);
+      if (roomId) {
+        client.leave(roomId);
+        await this.leaveRoomUseCase.leaveRoom(roomId, clientId);
+      }
     }
   }
 }
