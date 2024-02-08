@@ -67,7 +67,11 @@ It accepts JSON body, which concludes:
 ### Connecting and receiving message in a room
 To connect and join room, you can emit a socket event from the frontend/client for example:
 ```js
+// joining a room
 socketClient.emit('joinroom', `${roomName}`);
+
+// leaving a room
+socketClient.emit('leaveroom', `${roomName}`);
 ```
 and you can listen to `chat` event to receive real-time messages.
 ```js
@@ -76,7 +80,7 @@ socketClient.on(`chat`, (message) => {
 });
 ```
 
-## Improvement Room
+## Improvement Points
 Beside of the scalability and efficient application, this application has a lot room of improvements,
 such as:
 - Add a message read receipt, or message delivery status, using websocket and databases to store the status.
