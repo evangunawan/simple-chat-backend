@@ -12,7 +12,7 @@ export class SendChatMessageUsecase {
   }
 
   public async sendMessage(chatMessage: ChatMessage) {
-    chatMessage.timestamp = moment().unix();
+    chatMessage.timestamp = moment().unix() * 1000;
     await this._chatMessagePublisher.publish('ChatMessage', chatMessage.toJSONString());
   }
 }

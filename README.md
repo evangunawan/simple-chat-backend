@@ -1,7 +1,7 @@
 # Chat Backend
 
 ## About
-Welcome to chat backend application written using Node.js with NestJS framework.
+Welcome to the Chat API backend application written using Node.js with NestJS framework.
 A scalable, highly available real-time chat application written using TypeScript in Node.js.
 It also uses RabbitMQ as a message broker to ensure message delivery and availability.
 
