@@ -8,6 +8,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { JoinRoomUsecase } from '../../app/usecase/chat-room/join-room.usecase';
 import { LeaveRoomUsecase } from '../../app/usecase/chat-room/leave-room.usecase';
+import { Observable, Subject } from 'rxjs';
 
 @WebSocketGateway({
   cors: {
@@ -32,6 +33,11 @@ export class ChatRoomSocketGateway {
     } catch (e) {}
     if (parsed) {
       const { roomId, clientId } = parsed;
+
+      client.on('disconnect', () => {
+        console.log(`client ${client.id} ${clientId} disconnected from ${roomId}`);
+        this.leaveRoomUseCase.leaveRoom(roomId, clientId);
+      });
 
       if (roomId) {
         client.join(roomId);
