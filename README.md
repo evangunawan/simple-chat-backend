@@ -104,3 +104,6 @@ such as:
 - Refactor app socket gateway, since NestJS has its approach for WebSocket, socket server is provided and accessed from a singleton class. 
 - Add a database (such as MongoDB), to support rooms, logs, and users.
 - Add room features such as room password and API authentication to create/post a message. 
+
+## Testing and Demo
+You can clone supporting frontend project for this API from [evangunawan/simple-chat-frontend](https://github.com/evangunawan/simple-chat-frontend).
