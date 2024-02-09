@@ -26,37 +26,29 @@ export class ChatRoomSocketGateway {
 
   @SubscribeMessage('joinroom')
   async handleJoinRoom(@MessageBody() data: string, @ConnectedSocket() client: Socket) {
-    let parsed: { roomId: string; clientId: string };
+    let parsed: { token: string };
     try {
       parsed = JSON.parse(data);
     } catch (e) {}
     if (parsed) {
-      const { roomId, clientId } = parsed;
+      const { token } = parsed;
 
       client.on('disconnect', () => {
-        this.leaveRoomUseCase.leaveRoom(roomId, clientId);
+        this.leaveRoomUseCase.leaveRoom(client.id, token);
       });
-
-      if (roomId) {
-        client.join(roomId);
-        await this.joinRoomUseCase.joinRoom(roomId, clientId);
-      }
+      await this.joinRoomUseCase.joinRoom(client.id, token);
     }
   }
 
   @SubscribeMessage('leaveroom')
   async handleLeaveRoom(@MessageBody() data: string, @ConnectedSocket() client: Socket) {
-    let parsed: { roomId: string; clientId: string };
+    let parsed: { token: string };
     try {
       parsed = JSON.parse(data);
     } catch (e) {}
     if (parsed) {
-      const { roomId, clientId } = parsed;
-
-      if (roomId) {
-        client.leave(roomId);
-        await this.leaveRoomUseCase.leaveRoom(roomId, clientId);
-      }
+      const { token } = parsed;
+      await this.leaveRoomUseCase.leaveRoom(client.id, token);
     }
   }
 }

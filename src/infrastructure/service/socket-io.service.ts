@@ -10,4 +10,20 @@ export class SocketIoService implements SocketService {
     const server = SocketConnectionInstance.server;
     server.to(room).emit(event, data);
   }
+
+  public joinRoom(socketId: string, roomId: string): void {
+    const server = SocketConnectionInstance.server;
+    const sock = server.sockets.sockets.get(socketId);
+    if (sock) {
+      sock.join(roomId);
+    }
+  }
+
+  public leaveRoom(socketId: string, roomId: string): void {
+    const server = SocketConnectionInstance.server;
+    const sock = server.sockets.sockets.get(socketId);
+    if (sock) {
+      sock.leave(roomId);
+    }
+  }
 }

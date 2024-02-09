@@ -4,6 +4,7 @@ import { RabbitMQMessagePublisherService } from '../../../infrastructure/service
 import { SocketIoService } from '../../../infrastructure/service/socket-io.service';
 import { ProcessChatMessageUsecase } from './process-chat-message.usecase';
 import { RabbitMQInstance } from '../../../infrastructure/provider/rabbitmq.connection';
+import { RedisRoomChatTokenRepository } from '../../../infrastructure/repository/room-chat-token/redis';
 
 @Module({
   providers: [
@@ -16,6 +17,10 @@ import { RabbitMQInstance } from '../../../infrastructure/provider/rabbitmq.conn
     {
       provide: 'PUBLISHER_SERVICE',
       useFactory: () => new RabbitMQMessagePublisherService(RabbitMQInstance.channel),
+    },
+    {
+      provide: 'ROOM_CHAT_TOKEN_REPOSITORY',
+      useFactory: () => new RedisRoomChatTokenRepository(),
     },
   ],
   exports: [SendChatMessageUsecase, ProcessChatMessageUsecase],
