@@ -12,11 +12,11 @@ Clean architecture used for more cleaner, maintainable,
 readable code and also supporting easier infrastructure changes and updates.
 
 The project itself utilizes NestJS's dependency injection and modules to support the clean architecture approach.
-We can *plug n play* the infrastructure and frameworks needed to supply our usecases within NestJS modules.
+We can easily change and modify the infrastructure and frameworks needed to supply our usecases within NestJS modules.
 
-The application infrastructure mainly uses Rest API as a transport between client and this application.
+The application infrastructure uses Rest API and socket as a transport between client and this application.
 For example, frontend application can send chat message via REST API
-(which we can add more approach easily, since we are using clean architecture),
+(which we can add more approaches easily, since we are using clean architecture),
 the message then will be send to the RabbitMQ queue to ensure message delivery.
 
 Beside publishing message to the message broker, this application also actively consuming message from the same queue,
