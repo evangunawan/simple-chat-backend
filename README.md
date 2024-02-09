@@ -68,10 +68,11 @@ It accepts JSON body, which concludes:
 To connect and join room, you can emit a socket event from the frontend/client for example:
 ```js
 // joining a room
-socketClient.emit('joinroom', `${roomName}`);
+const payload = { clientId: 'evangunawan', roomId: 'TESTROOM' };
+socketClient.emit('joinroom', JSON.stringify(payload));
 
 // leaving a room
-socketClient.emit('leaveroom', `${roomName}`);
+socketClient.emit('leaveroom', JSON.stringify(payload));
 ```
 and you can listen to `chat` event to receive real-time messages.
 ```js
